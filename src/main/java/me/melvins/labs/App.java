@@ -33,12 +33,18 @@ public class App {
 
     private static final String URL_SEPARATOR = "/";
 
-    private static String bingPhotoOfTheDayUrl = "http://www.bing.com/HPImageArchive" +
-            ".aspx?format=js&idx=0&n=3&mkt=en-IN";
+    private static String bingPhotoOfTheDayUrlTemplate = "http://www.bing.com/HPImageArchive" +
+            ".aspx?format=js&idx=0&n={0}&mkt=en-US";
 
     public static void main(String[] args) {
 
         SpringApplication.run(App.class, args);
+
+        String numberOfImagesToDownload = args[0];
+        // Form the URL to invoke Bing Photo of the Day API.
+        String bingPhotoOfTheDayUrl = MessageFormat.format(App.bingPhotoOfTheDayUrlTemplate, numberOfImagesToDownload);
+
+        String folderPath = "C:\\Users\\melvin_mathai\\Pictures\\Bing\\";
 
         RestTemplate restTemplate = new RestTemplate();
         BingModel bingModel = restTemplate.getForObject(bingPhotoOfTheDayUrl, BingModel.class);
@@ -51,18 +57,18 @@ public class App {
         for (BingImageModel bingImageModel : bingModel.getBingImageModelList()) {
             LOGGER.debug("Processing {0}", bingImageModel);
 
-            String url = bingImageModel.getUrl();
-            String imageName = url.split(URL_SEPARATOR)[4];
-            String uri = MessageFormat.format("http://bing.com{0}", url);
+            String imageUri = bingImageModel.getUrl();
+            String imageName = imageUri.split(URL_SEPARATOR)[4];
+            String imageUrl = MessageFormat.format("http://bing.com{0}", imageUri);
 
             LOGGER.info("Downloading Image {0}", imageName);
-            ResponseEntity<byte[]> response = restTemplate.exchange(uri, GET, entity, byte[].class, "1");
+            ResponseEntity<byte[]> response = restTemplate.exchange(imageUrl, GET, entity, byte[].class, "1");
 
             HttpStatus statusCode = response.getStatusCode();
             if (statusCode == OK) {
                 LOGGER.info("Writing Image {0} To Disk", imageName);
                 try {
-                    Files.write(Paths.get(imageName), response.getBody());
+                    Files.write(Paths.get(folderPath + imageName), response.getBody());
 
                 } catch (IOException ex) {
                     LOGGER.error("Unexpected Exception While Writing Image {0}", imageName, ex);
