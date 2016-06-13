@@ -7,7 +7,7 @@
     </Properties>
 
     <Appenders>
-        <RollingRandomAccessFile name="LogFile" fileName="${logFilePrefix}"
+        <RollingRandomAccessFile name="LogFile" fileName="${logFilePrefix}.log"
                                  filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
             <PatternLayout>
                 <Pattern>${logPattern}</Pattern>
