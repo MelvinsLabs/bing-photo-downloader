@@ -1,5 +1,5 @@
 
-[![Dependency Status](https://www.versioneye.com/user/projects/575e1dd47757a0003bd4c2ac?child=summary#dialog_dependency_badge)]
+[![Dependency Status](https://www.versioneye.com/user/projects/575e1dd47757a0003bd4c2ac?badge.svg?style=flat)] (https://www.versioneye.com/user/projects/575e1dd47757a0003bd4c2ac)
 
 # ReadMe
 
