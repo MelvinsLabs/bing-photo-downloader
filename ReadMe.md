@@ -1,6 +1,5 @@
 
-[![Dependency Status](https://www.versioneye.com/user/projects/575e1dd47757a0003bd4c2ac?badge.svg?style=flat)] (https://www.versioneye.com/user/projects/575e1dd47757a0003bd4c2ac)
-
+[![Dependency Status](https://www.versioneye.com/user/projects/575e1dd47757a0003bd4c2ac/badge.svg?style=flat)](https://www.versioneye.com/user/projects/575e1dd47757a0003bd4c2ac)
 # ReadMe
 
 This GIT Repository holds the Source Code for the below mentioned Application.
